@@ -119,6 +119,24 @@ header {
   display: none; /* Hidden on desktop; shown on smaller screens */
 }
 
+#task-button {
+    background-color: #635fc7;
+    color: #ffffff;
+    border: none;
+    border-radius: 40px;
+    height: 48px;
+    width: 150px;
+    font-weight: bold;
+    font-size: 0.9375rem;
+    font-family: inherit;
+    margin-left: 670px;
+    cursor: pointer;
+}
+
+#small-screen-btn {
+    display: none;       /* display only on small screen sizes*/
+}
+
 /* ===============
    Board Columns
 ================ */
@@ -306,6 +324,20 @@ form select {
   padding-right: 1rem;
 }
 
+.createTask {
+    background-color: #635fc7;
+    color: #ffffff;
+    border: none;
+    border-radius: 40px;
+    height: 40px;
+    width: 550px;
+    font-weight: bold;
+    font-size: 0.9375rem;
+    font-family: inherit;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
 /* ========================
    Responsive Styles
 ======================== */
@@ -398,5 +430,25 @@ form select {
 
   .column-div {
     padding: 24px;
+  }
+
+  #task-button  {
+    display: none;
+  }
+
+  #small-screen-btn {
+    background-color: #635fc7;
+    color: #ffffff;
+    border: none;
+    border-radius: 100%;
+    height: 40px;
+    width: 48px;
+    font-weight: bold;
+    font-size: 22px;
+    font-family: inherit;
+    padding-bottom: 5px;
+    display: block;
+    margin-left: 160px;
+    cursor: pointer;
   }
 }

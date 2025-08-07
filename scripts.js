@@ -70,6 +70,9 @@ function openTaskModal(task) {
   statusSelect.value = task.status;
 
   modal.showModal();
+
+  const createTaskbtn = document.querySelector(".createTask");
+  createTaskbtn.remove();
 }
 
 /**
@@ -95,3 +98,22 @@ function initTaskBoard() {
 
 // Wait until DOM is fully loaded
 document.addEventListener("DOMContentLoaded", initTaskBoard);
+
+//button that, when clicked, opens a modal for creating a new task.
+const addTask = document.getElementById("task-button");
+
+addTask.addEventListener('click', () => {
+    const modal = document.getElementById("task-modal");
+    const titleInput = document.getElementById("task-title");
+    const descInput = document.getElementById("task-desc");
+    const statusSelect = document.getElementById("task-status");
+
+    titleInput.placeholder = "Enter task title";
+    descInput.placeholder = "Enter task description";
+    statusSelect.value = "";
+
+    modal.showModal();
+
+    const createTaskbtn = document.querySelector(".createTask");
+    createTaskbtn.appendChild();
+});
