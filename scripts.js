@@ -1,5 +1,16 @@
 import { initialTasks } from "./initialData.js";
 
+//function to save initial tasks to local storage
+function saveTasksToLocalStorage() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+//load tasks from local storage
+function getTasksFromLocalStorage() {
+  const storedTasks = localStorage.getItem("tasks");
+  return storedTasks ? JSON.parse(storedTasks) : [];
+}
+
 /**
  * Creates a single task DOM element.
  * @param {Object} task - Task data object.
@@ -70,9 +81,6 @@ function openTaskModal(task) {
   statusSelect.value = task.status;
 
   modal.showModal();
-
-  const createTaskbtn = document.querySelector(".createTask");
-  createTaskbtn.remove();
 }
 
 /**
@@ -91,29 +99,18 @@ function setupModalCloseHandler() {
  * Initializes the task board and modal handlers.
  */
 function initTaskBoard() {
-  clearExistingTasks();
-  renderTasks(initialTasks);
+  let tasks = getTasksFromLocalStorage();
+
+  if(tasks.length === 0) {
+    saveTasksToLocalStorage(initialTasks);
+    tasks = initialTasks;
+  }
+
+  renderTasks(tasks);
   setupModalCloseHandler();
 }
 
 // Wait until DOM is fully loaded
 document.addEventListener("DOMContentLoaded", initTaskBoard);
 
-//button that, when clicked, opens a modal for creating a new task.
-const addTask = document.getElementById("task-button");
-
-addTask.addEventListener('click', () => {
-    const modal = document.getElementById("task-modal");
-    const titleInput = document.getElementById("task-title");
-    const descInput = document.getElementById("task-desc");
-    const statusSelect = document.getElementById("task-status");
-
-    titleInput.placeholder = "Enter task title";
-    descInput.placeholder = "Enter task description";
-    statusSelect.value = "";
-
-    modal.showModal();
-
-    const createTaskbtn = document.querySelector(".createTask");
-    createTaskbtn.appendChild();
-});
+/* ----------------------------------------------------------------------------------- */
