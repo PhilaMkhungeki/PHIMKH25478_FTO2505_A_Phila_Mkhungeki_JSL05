@@ -1,7 +1,7 @@
 import { initialTasks } from "./initialData.js";
 
 //function to save initial tasks to local storage
-function saveTasksToLocalStorage() {
+function saveTasksToLocalStorage(tasks) {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
@@ -114,3 +114,54 @@ function initTaskBoard() {
 document.addEventListener("DOMContentLoaded", initTaskBoard);
 
 /* ----------------------------------------------------------------------------------- */
+const addTaskBtn = document.getElementById("task-button");
+const addTaskModal = document.getElementById("addTask-modal");
+const closeAddModalBtn = document.getElementById("close-addTaskmodal-btn");
+const addTaskForm = document.querySelector("#task-form");
+
+// Open modal when "Add Task" button is clicked
+addTaskBtn.addEventListener("click", () => {
+    addTaskModal.showModal();
+});
+
+// Close modal
+closeAddModalBtn.addEventListener("click", () => {
+  addTaskModal.close();
+});
+
+//Submit new task
+addTaskForm.addEventListener("submit", (e) => {
+  e.preventDefault(); //prevent default page reload
+  
+  const title = document.getElementById("taskTitle").value.trim();
+  const description = document.getElementById("taskDescription").value.trim();
+  const status = document.getElementById("taskStatus").value;
+
+  const tasks = getTasksFromLocalStorage();
+  console.log("got tasks from local storage");
+  //set each task to have a unique id that increments from the last existing task
+  let newId = 1;
+  if (tasks.length > 0) {
+    const lastTask = tasks[tasks.length - 1];
+    newId = lastTask.id + 1;
+  }
+
+  const newTask = {
+    id: newId,
+    title,
+    description,
+    status
+  };
+
+  tasks.push(newTask);
+  console.log("pushed to initial tasks!");
+
+  saveTasksToLocalStorage(tasks);
+  console.log("saved to local storage");
+
+  renderTasks(tasks);
+  addTaskForm.reset();
+  console.log("display on board!");
+
+  addTaskModal.close();
+});
