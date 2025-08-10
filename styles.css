@@ -260,6 +260,18 @@ dialog {
   /*font-family: "Plus Jakarta Sans", sans-serif;*/
 }
 
+#addTask-modal {
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  padding: 24px;
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
 /* Header */
 .modal-header {
   display: flex;
@@ -330,7 +342,7 @@ form select {
     border: none;
     border-radius: 40px;
     height: 40px;
-    width: 550px;
+    width: 100%;
     font-weight: bold;
     font-size: 0.9375rem;
     font-family: inherit;
